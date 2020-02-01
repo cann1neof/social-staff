@@ -17,20 +17,20 @@
             </v-row>
             <v-row class="text-left">
                 <v-col cols="2">
-                    <img :src="`https://randomuser.me/api/portraits/men/${$route.params.id }.jpg`" style="max-width: 100%">
+                    <img :src="profile.photo" style="max-width: 100%">
                 </v-col>
                 <v-col cols="10" class="text-left">
-                    <p>...
+                    <p>
                         Веб-сайт: <a :href="profile.website" target="_blank">{{profile.website}}</a>
                     </p>
                     <p>
                         E-mail: <a :href="'mailto:' + profile.email">{{profile.email}}</a>
                     </p>
                     <p>
-                        Город: {{ profile.address.city}}, {{ profile.address.street}}
+                        Город: {{ profile.city}}
                     </p>
                     <p>
-                        Место работы: {{profile.company.name}}
+                        Место работы: {{profile.company}}
                     </p>
                 </v-col>
             </v-row>
@@ -57,32 +57,29 @@
     export default {
         data : () => ({
           profile : [],
-          posts: []
+          posts: [],
         }),
         methods: {
-            loadPosts(){
-                this.$axios.get(`http://jsonplaceholder.typicode.com/posts?userId=${ this.$route.params.id  }`
-                ).then( response => {
-                    this.posts = response.data
-                })
-            },
-            loadUsers(){
-                this.$axios.get(`http://jsonplaceholder.typicode.com/users/${ this.$route.params.id  }`
-                ).then( response => {
-                    this.profile = response.data
-                })
+            loadUser(){
+                this.$axios.get( 'http://188.225.47.187/api/jsonstorage/f1447a62dcaba92ed1ddd2d652b63a8a').then( res => {                   
+                    for(let each of res.data){
+                        if (each.id == this.$route.params.id){
+                            this.profile = each
+                            break
+                        }
+                    }
+                } ).catch( err => {
+                    console.log('rrr', err)
+                } ) 
             }
         },
         mounted(){
-            this.loadUsers()
-            this.loadPosts()
+            this.loadUser()
         },
         watch: {
             $route(){
-                this.loadUsers()
-                this.loadPosts()
+                this.loadUser()
             }
         }
-        
     }
 </script>

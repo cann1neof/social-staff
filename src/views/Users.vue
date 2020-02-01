@@ -17,17 +17,17 @@
             </v-row>
             <v-row class="text-left">
                 <v-col cols="2">
-                    <v-img v-if="user" :src="`https://randomuser.me/api/portraits/men/${user.id }.jpg`"> </v-img>
+                    <v-img v-if="user" :src="user.photo"> </v-img>
                 </v-col>
                 
                 <v-divider vertical></v-divider>
                 
                 <v-col cols="9" class="text-left">
                     <p>
-                        Город: {{ user.address.city}}, {{ user.address.street}}
+                        Город: {{ user.city}}
                     </p>
                     <p>
-                        Место работы: {{user.company.name}}
+                        Место работы: {{user.company}}
                     </p>
                 </v-col>
             </v-row>
@@ -52,7 +52,7 @@
         }),
         methods:{
             loadListUsers(){
-                this.axios.get('http://jsonplaceholder.typicode.com/users').then( res => {
+                this.axios.get('http://188.225.47.187/api/jsonstorage/f1447a62dcaba92ed1ddd2d652b63a8a').then( res => {
                     this.users = res.data
                 } ).catch( err => {
                     console.log('rrr', err)
