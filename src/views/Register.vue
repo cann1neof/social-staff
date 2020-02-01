@@ -103,7 +103,11 @@
             async register(){
                 let tmp = []
                 let newid = undefined
-                if (this.password1 === this.password2){
+                if (!this.login)    this.alert('Введите логин')
+                if (!this.name)     this.alert('Введите Имя')
+                if (!this.password1)this.alert('Введите пароль')
+
+                if (this.password1 === this.password2 && this.login && this.name){
                     try {
                         await this.axios.get(this.usersURL).then( res => {
                             tmp = res.data
