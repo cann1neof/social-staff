@@ -32,18 +32,17 @@
 </template>
 
 <script>
-// http://188.225.47.187/api/jsonstorage/f1447a62dcaba92ed1ddd2d652b63a8a
     export default {
         data : () => ({
             login : '',
             password : '',
-            loginURL : 'http://188.225.47.187/api/jsonstorage/f1447a62dcaba92ed1ddd2d652b63a8a'
         }),
         methods : {
             authenticate(){
-                this.axios.get(this.loginURL).then( res => {
-                    const users = res.data
+                this.axios.get(this.$store.getters.userURL).then( res => {
+                    this.$store.dispatch('updateState', [ 'AUsers', res.data ])
                     let found = false
+                    const users = res.data
                     for(let each in users){
                         if(this.login == users[each].login && this.password == users[each].password){
                             this.$emit('login', each)

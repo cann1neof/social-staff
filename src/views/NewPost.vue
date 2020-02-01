@@ -32,12 +32,19 @@
         data : () => ({
             title : '',
             body : '',
-            postUrl : 'http://188.225.47.187/api/jsonstorage/ba3c33e494c72686bff15526dee0199f',
+            id : this.$store.getters.getCID
         }),
         methods: {
             create(){
                 if(this.title.replace(/\s/g,"") != "" && this.body.replace(/\s/g,"") != ""){
-                    this.$emit('sendPost', {'title' : this.title, 'body' : this.body})
+                    this.$store.dispatch('updateState', 
+                    [ 'addPost', 
+                        { 
+                            'title'  : this.title,
+                            'body'   : this.body,
+                            'author' : this.id,
+                        } 
+                    ])
                 }
             }
         }

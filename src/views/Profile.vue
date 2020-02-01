@@ -61,16 +61,8 @@
         }),
         methods: {
             loadUser(){
-                this.$axios.get( 'http://188.225.47.187/api/jsonstorage/f1447a62dcaba92ed1ddd2d652b63a8a').then( res => {                   
-                    for(let each of res.data){
-                        if (each.id == this.$route.params.id){
-                            this.profile = each
-                            break
-                        }
-                    }
-                } ).catch( err => {
-                    console.log('rrr', err)
-                } ) 
+                this.profile = this.$store.getUsers[ this.$route.params.id ]
+                this.posts = this.$store.getPosts.map( el => el.author == this.$route.params.id ? el : undefined)
             }
         },
         mounted(){

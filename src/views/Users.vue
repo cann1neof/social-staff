@@ -1,8 +1,8 @@
 <template>
     <div v-if="users" fluid class="d-flex flex-wrap justify-center">
         <v-card 
-            v-for="user in users" 
-            :key="user.id"
+            v-for="(user, index)in $store.getters.getUsers" 
+            :key="index"
             min-width="600"
             class="mb-4 ml-4 px-3 pb-3" 
             hover
@@ -44,32 +44,3 @@
         </v-card>
     </div>
 </template>
-
-<script>
-    export default {
-        data : () => ({
-          users : [],
-        }),
-        methods:{
-            loadListUsers(){
-                this.axios.get('http://188.225.47.187/api/jsonstorage/f1447a62dcaba92ed1ddd2d652b63a8a').then( res => {
-                    this.users = res.data
-                } ).catch( err => {
-                    console.log('rrr', err)
-                } )
-            }
-        },
-        mounted(){
-            this.loadListUsers()
-        },
-        watch: {
-            $route(){
-                this.loadListUsers()
-            }
-        }
-    }
-</script>
-
-<style scoped>
-
-</style>

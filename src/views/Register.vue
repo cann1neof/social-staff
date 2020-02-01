@@ -100,43 +100,24 @@
             photo : '',
         }),
         methods : {
-            async register(){
-                let tmp = []
-                let newid = undefined
+            register(){
                 if (!this.login)    this.alert('Введите логин')
                 if (!this.name)     this.alert('Введите Имя')
                 if (!this.password1)this.alert('Введите пароль')
 
                 if (this.password1 === this.password2 && this.login && this.name){
-                    try {
-                        await this.axios.get(this.usersURL).then( res => {
-                            tmp = res.data
-                            newid = parseInt(tmp[tmp.length - 1].id) + 1
-                            tmp.push({
-                                'id' : newid,
-                                'login' : this.login,
-                                'password' : this.password1,
-                                'name' : this.name,
-                                'website' : this.website,
-                                'email' : this.email,
-                                'city' : this.city,
-                                'comp' : this.comp,
-                                'photo' : this.photo,
-                            })
-                        })
-                    } catch (err) {
-                        console.log('error at get',err)
+                    const tmp = {
+                        'id' : newid,
+                        'login' : this.login,
+                        'password' : this.password1,
+                        'name' : this.name,
+                        'website' : this.website,
+                        'email' : this.email,
+                        'city' : this.city,
+                        'comp' : this.comp,
+                        'photo' : this.photo,
                     }
-                    try {
-                        await this.axios.put(this.usersURL, tmp).then( () => { 
-                            this.$emit('login', newid - 1)
-                            this.$router.push('/') 
-                        } ).catch( err => {
-                            console.log('rrr', err)                        
-                        } )
-                    } catch (err) {
-                        console.log('error at post',err)
-                    }
+                    this.$store.dispatch('updateState', [ 'addUser', tmp ])
                 }
             }
         }

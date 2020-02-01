@@ -71,52 +71,22 @@
 
 <script>
     export default {
-        data : () => ({
-            mainURL : 'http://188.225.47.187/api/jsonstorage/f1447a62dcaba92ed1ddd2d652b63a8a',
-            postUrl : 'http://188.225.47.187/api/jsonstorage/ba3c33e494c72686bff15526dee0199f',
-            myId : undefined,
-            myProfile : undefined
+        data : ()=>({
+            myProfile : []
         }),
         methods : {
             UpdateUser(newId){
-                this.myId = newId
+                this.$route.dispatch('updateState', [ 'CID', newId ] )
             }, 
             getProfile(){
-                if(this.myId == undefined){
+                if(this.$store.getters.getCID == undefined){
                     this.$router.push('/login/')
                 }
-                if(this.myId == 'registering'){
+                else if(this.$store.getters.getCID == 'registering'){
                     this.$router.push('/register/')
                 }
-                this.axios.get(this.mainURL).then( res => {
-                    this.myProfile = res.data[this.myId]
-                } ).catch( err => {
-                    console.log('rrr', err)
-                } )
-            },
-            async sendPost(data){
-                let tmp = []
-                try {
-                    await this.axios.get(this.postUrl).then( res => {
-                        tmp = res.data
-                        tmp.push({
-                            'title' : data.title,
-                            'body' : data.body,
-                            'author' : parseInt(this.myId) + 1
-                        })
-                    })
-                } catch (err) {
-                    console.log('error at get',err)
-                }
-                try {
-                    await this.axios.put(this.postUrl, tmp).then( res => { 
-                        console.log('some res', res)
-                        this.$router.push('/') 
-                    } ).catch( err => {
-                        console.log('rrr', err)                        
-                    } )
-                } catch (err) {
-                    console.log('error at post',err)
+                else {
+                    this.myProfile = this.$store.getters.getUsers[this.$store.getters.getCID]
                 }
             },
         },
@@ -135,26 +105,6 @@
 </script>
 
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+<style>
 </style>
 
