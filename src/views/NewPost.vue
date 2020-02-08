@@ -29,23 +29,39 @@
 <script>
     export default {
         //http://188.225.47.187/api/jsonstorage/76ce57a84a3263d8b9a42bad496071b2
-        data : () => ({
-            title : '',
-            body : '',
-            id : this.$store.getters.getCID
-        }),
+        data : () => {
+            return {
+                title : '',
+                body : '',
+                id : -1,
+            }
+        },
         methods: {
-            create(){
+            async create(){
+                await this.updID()
                 if(this.title.replace(/\s/g,"") != "" && this.body.replace(/\s/g,"") != ""){
-                    this.$store.dispatch('updateState', 
+                    await this.$store.dispatch('updateState', 
                     [ 'addPost', 
                         { 
                             'title'  : this.title,
                             'body'   : this.body,
-                            'author' : this.id,
+                            'author' : this.id + 1,
                         } 
                     ])
+                    this.$router.push('/')
                 }
+            },
+            updID(){
+                this.id = this.$store.getters.getCID
+                console.log('new id ', this.id)
+            }
+        },
+        mounted(){
+            this.updID
+        },
+        watch : {
+            $route(){
+                this.updID
             }
         }
     }

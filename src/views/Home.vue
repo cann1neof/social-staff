@@ -1,7 +1,7 @@
 <template>
-    <div v-if="posts && users">
+    <div v-if= "$store.getters.getPosts && $store.getters.getUsers" >
         <v-card 
-            v-for="(post, index) in $store.getters.getPosts" 
+            v-for="(post, index) in $store.getters.getPosts.reverse()" 
             :key="index" 
             width="450"
             class = "my-2 mx-auto"
@@ -18,9 +18,11 @@
                 <v-btn
                     outlined
                     color="green"
-                    @click="red(post)"
+                    @click="$router.push(`/profile/${post.author}`)"
+                    v-if="$store.getters.getUsers[post.author - 1]"
                     >
-                <v-icon class="mr-2"> mdi-account-badge-horizontal </v-icon> {{ $store.getters.getUsers[post.author].name }}
+                <v-icon class="mr-2"> mdi-account-badge-horizontal </v-icon> 
+                {{ $store.getters.getUsers[post.author - 1].name }}
                 </v-btn>
             </v-card-actions>
         </v-card>
@@ -31,9 +33,7 @@
 export default {
   name: 'home',
   methods : {
-    red(post){
-        this.$router.push(`/profile/${post.author}`)
-    }
+
   }
 }
 </script>

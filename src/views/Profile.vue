@@ -17,7 +17,7 @@
             </v-row>
             <v-row class="text-left">
                 <v-col cols="2">
-                    <img :src="profile.photo" style="max-width: 100%">
+                    <img :src="profile.photo" style="max-width: 200px">
                 </v-col>
                 <v-col cols="10" class="text-left">
                     <p>
@@ -36,20 +36,24 @@
             </v-row>
         </v-card>
         <v-divider width="1050" class="mx-auto"></v-divider>
-        <v-card 
-            v-for="post in posts" 
-            :key="post.id" 
-            width="900"
-            class = "my-2 mx-auto"
-            min-height="150"
-            > 
-            <v-card-title>
-                {{post.title}}
-            </v-card-title>
-            <v-card-text>
-                {{post.body}}
-            </v-card-text>
-        </v-card>
+        <div 
+            v-for="(post, index) in posts" 
+            :key="index" 
+            >
+            <v-card 
+                v-if="post != -404"
+                width="900"
+                class = "my-2 mx-auto"
+                min-height="150"
+                > 
+                <v-card-title>
+                    {{post.title}}
+                </v-card-title>
+                <v-card-text>
+                    {{post.body}}
+                </v-card-text>
+            </v-card>
+        </div>
     </div>
 </template>
 
@@ -61,8 +65,11 @@
         }),
         methods: {
             loadUser(){
-                this.profile = this.$store.getUsers[ this.$route.params.id ]
-                this.posts = this.$store.getPosts.map( el => el.author == this.$route.params.id ? el : undefined)
+                this.profile = this.$store.getters.getUsers[ this.$route.params.id - 1 ]
+                console.log('prof : ',this.profile)
+                this.posts = this.$store.getters.getPosts.map( el => el.author == this.$route.params.id ? el : -404)
+                console.log('posts : ',this.posts)
+                console.log('posts in store', this.$store.getters.getPosts)
             }
         },
         mounted(){

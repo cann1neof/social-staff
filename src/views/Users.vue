@@ -1,7 +1,7 @@
 <template>
     <div v-if="users" fluid class="d-flex flex-wrap justify-center">
         <v-card 
-            v-for="(user, index)in $store.getters.getUsers" 
+            v-for="(user, index) in users" 
             :key="index"
             min-width="600"
             class="mb-4 ml-4 px-3 pb-3" 
@@ -36,7 +36,7 @@
                 <v-btn
                     outlined
                     color="green"
-                    :href="`/profile/${user.id}`"
+                    @click="$router.push(`/profile/${user.id}`)"
                     >
                 <v-icon class="mr-2"> mdi-account-badge-horizontal</v-icon> Перейти в профиль
                 </v-btn>
@@ -44,3 +44,31 @@
         </v-card>
     </div>
 </template>
+
+
+<script>
+import {mapState} from 'vuex'
+
+export default {
+    data : () =>({
+        users :[],
+    }),
+    methods : {
+        loadUsers(){
+            this.users = this.$store.getters.getUsers
+            console.log(this.users)
+        }
+    },
+    mounted(){
+        this.loadUsers()
+    },
+    watch : {
+        $route(){
+            this.loadUsers()
+        }
+    },
+    computed: mapState({
+
+    }),
+}
+</script>

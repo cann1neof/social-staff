@@ -106,6 +106,7 @@
                 if (!this.password1)this.alert('Введите пароль')
 
                 if (this.password1 === this.password2 && this.login && this.name){
+                    const newid = this.newid()
                     const tmp = {
                         'id' : newid,
                         'login' : this.login,
@@ -117,8 +118,15 @@
                         'comp' : this.comp,
                         'photo' : this.photo,
                     }
+                    this.$emit('login', newid - 1)
                     this.$store.dispatch('updateState', [ 'addUser', tmp ])
+                    this.$router.push('/')
                 }
+            },
+            newid(){
+                const users = this.$store.getters.getUsers
+                const lastUser = users[users.length - 1].id + 1
+                return lastUser
             }
         }
     }

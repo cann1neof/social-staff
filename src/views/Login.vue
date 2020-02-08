@@ -18,6 +18,7 @@
                 outlined
                 rounded
                 type="password"
+                @keypress.enter="authenticate"
             ></v-text-field>
 
             <v-btn @click="authenticate" color="white" light>
@@ -56,7 +57,7 @@
             },
             register(){
                 this.$emit('login', 'registering')
-                this.$router.push('/register')
+                this.$router.push('/register/')
             }
         }
     }

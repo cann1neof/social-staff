@@ -1,19 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userStorage : 'http://188.225.47.187/api/jsonstorage/f1447a62dcaba92ed1ddd2d652b63a8a',
-    postStorage : 'http://188.225.47.187/api/jsonstorage/ba3c33e494c72686bff15526dee0199f',
-    curID : 0,
-    users : () => {
-      this.axios.get(userStorage).then(res => {return res.data} ).catch( ()=>{ return [] } )
-    },
-    posts : () => {
-      this.axios.get(postStorage).then(res => {return res.data} ).catch( ()=>{ return [] } )
-    },
+    userStorage : 'http://188.225.47.187/api/jsonstorage/958dea570a05b8340764e3f33491cab7',
+    postStorage : 'http://188.225.47.187/api/jsonstorage/18dac9e8448e881a0d3e1ab8c55f552a',
+    curID : -1,
+    users : [],
+    posts : [],
   },
   mutations: {
     CID(state, data){
@@ -35,12 +32,12 @@ export default new Vuex.Store({
   actions: {
     updateState(ctx, u_data){
       ctx.commit(u_data[0], u_data[1])
-      
+
       if(u_data[0] === 'addPost'){
-        await this.axios.put(ctx.state.postStorage, ctx.state.posts)
+        axios.put(ctx.state.postStorage, ctx.state.posts).then(res => console.log(res) )
       }
       else if(u_data[0] === 'addUser'){
-        await this.axios.put(ctx.state.postStorage, ctx.state.users)
+        axios.put(ctx.state.userStorage, ctx.state.users).then(res => console.log(res) )
       }
     }
   },
