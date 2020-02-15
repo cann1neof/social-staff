@@ -8,9 +8,10 @@
         permanent
         right
         app
+        v-if="myProfile.id"
     >
         <v-list nav shaped dense >
-            <v-list-item two-line v-if="$store.getters.getCID != -1">
+            <v-list-item two-line v-if="$store.getters.getCID != -1 && $store.getters.getCID != 'registering'">
 
                 <v-list-item-avatar>
                     <img :src="myProfile.photo" alt="maaaaaan">
@@ -20,9 +21,16 @@
                     <v-list-item-title    class="font-weight-black"> {{myProfile.login}} </v-list-item-title>
                     <v-list-item-subtitle class="font-weight-black"> {{myProfile.name}} </v-list-item-subtitle>
                 </v-list-item-content>
-                <v-btn class="mx-2" fab dark color="purple darken-2" link to="/newpost/">
-                    <v-icon dark>mdi-plus</v-icon>
-                </v-btn>    
+            </v-list-item>
+
+            <v-list-item link to="/newpost/">
+                <v-list-item-icon> <v-icon> mdi-plus </v-icon> </v-list-item-icon>
+
+                <v-list-item-content  >
+                    <v-list-item-title class="text-left font-weight-black">
+                        Создать запись
+                    </v-list-item-title>
+                </v-list-item-content>
             </v-list-item>
 
             <v-divider class="my-3"></v-divider>
@@ -37,7 +45,7 @@
                 </v-list-item-content>
             </v-list-item>
 
-            <v-list-item hover link :to="`/profile/${myProfile.id}`" v-if="myProfile.id">
+            <v-list-item hover link :to="`/profile/${myProfile.id}`" >
                 <v-list-item-icon> <v-icon> mdi-account </v-icon> </v-list-item-icon>
 
                 <v-list-item-content>
@@ -56,7 +64,24 @@
                     </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
-        
+
+            <v-list-item hover link to="/settings/">
+                <v-list-item-icon> <v-icon> mdi-settings </v-icon> </v-list-item-icon>
+
+                <v-list-item-content>
+                    <v-list-item-title class="text-left">
+                        Настройки
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+            
+            
+
+            <!-- <v-list-item>
+                <v-btn class="mx-2" fab dark color="purple darken-2" link to="/newpost/">
+                    <v-icon dark>mdi-plus</v-icon>
+                </v-btn>    
+            </v-list-item> -->
         </v-list>
     </v-navigation-drawer>
     

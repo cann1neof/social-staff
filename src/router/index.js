@@ -6,6 +6,7 @@ import Users from '../views/Users.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import NewPost from '../views/NewPost.vue'
+import Settings from '../views/Settings.vue'
 
 
 
@@ -23,6 +24,10 @@ const routes = [
   {
     path: '/users/',
     component: Users
+  },
+  {
+    path: '/settings/',
+    component: Settings
   },
   {
     path: '/login/',

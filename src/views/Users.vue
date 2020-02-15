@@ -11,23 +11,23 @@
                 <v-col cols="10">
                     <h1 class="green--text text--darken-2">
                         <v-icon large color="green darken-2">mdi-account-outline</v-icon>
-                        {{user.name}}
+                        {{ user.name }}
                     </h1>
                 </v-col>
             </v-row>
             <v-row class="text-left">
                 <v-col cols="2">
-                    <v-img v-if="user" :src="user.photo"> </v-img>
+                    <v-img v-if="user" :src="user.photo" max-width="100"> </v-img>
                 </v-col>
                 
                 <v-divider vertical></v-divider>
                 
                 <v-col cols="9" class="text-left">
                     <p>
-                        Город: {{ user.city}}
+                        Город: {{ user.city }}
                     </p>
                     <p>
-                        Место работы: {{user.company}}
+                        Место работы: {{ user.company }}
                     </p>
                 </v-col>
             </v-row>
@@ -36,9 +36,9 @@
                 <v-btn
                     outlined
                     color="green"
-                    @click="$router.push(`/profile/${user.id}`)"
+                    @click="$router.push(`/profile/${ user.id }`)"
                     >
-                <v-icon class="mr-2"> mdi-account-badge-horizontal</v-icon> Перейти в профиль
+                <v-icon class="mr-2"> mdi-account-badge-horizontal </v-icon> Перейти в профиль
                 </v-btn>
             </v-card-actions>
         </v-card>

@@ -5,17 +5,20 @@
                Регистрация
             </v-card-title>
 
-            <v-divider class="mx-auto my-2"  color="green darken-4"></v-divider>
-
+            <v-divider class="mx-auto"  color="white"></v-divider>
+            <v-card-subtitle>
+                * - Обязательные поля <br />
+                <span style="color: #9D040C;"> Внимание! По техническим причинам изменение данных, по завершении регистрации, временно недоступно </span>
+            </v-card-subtitle>
             <v-text-field
-                label="Введите логин"
+                label="* Введите логин"
                 v-model="login"
                 outlined
                 rounded
             ></v-text-field>
 
             <v-text-field
-                label="Введите пароль"
+                label="* Введите пароль"
                 v-model="password1"
                 outlined
                 rounded
@@ -23,7 +26,7 @@
             ></v-text-field>
 
             <v-text-field
-                label="Подтвердите пароль"
+                label="* Подтвердите пароль"
                 v-model="password2"
                 outlined
                 rounded
@@ -31,7 +34,7 @@
             ></v-text-field>
 
             <v-text-field
-                label="Введите имя"
+                label="* Введите имя"
                 v-model="name"
                 outlined
                 rounded
@@ -78,6 +81,10 @@
                 type="text"
             ></v-text-field>
 
+            <v-btn @click="$emit('login', -1); $router.push('/login/')" color="white" light class="mr-2">
+                Назад
+            </v-btn>
+
             <v-btn @click="register" color="white" light>
                 Подтвердить
             </v-btn>
@@ -101,9 +108,9 @@
         }),
         methods : {
             register(){
-                if (!this.login)    this.alert('Введите логин')
-                if (!this.name)     this.alert('Введите Имя')
-                if (!this.password1)this.alert('Введите пароль')
+                if (!this.login)     alert('Введите логин')
+                if (!this.name)      alert('Введите имя')
+                if (!this.password1) alert('Введите пароль')
 
                 if (this.password1 === this.password2 && this.login && this.name){
                     const newid = this.newid()

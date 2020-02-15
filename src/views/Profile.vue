@@ -17,11 +17,11 @@
             </v-row>
             <v-row class="text-left">
                 <v-col cols="2">
-                    <img :src="profile.photo" style="max-width: 200px">
+                    <img :src="profile.photo" style="max-width: 100%">
                 </v-col>
                 <v-col cols="10" class="text-left">
                     <p>
-                        Веб-сайт: <a :href="profile.website" target="_blank">{{profile.website}}</a>
+                        Веб-сайт: <a :href="'http://' + profile.website" target="_blank">{{profile.website}}</a>
                     </p>
                     <p>
                         E-mail: <a :href="'mailto:' + profile.email">{{profile.email}}</a>

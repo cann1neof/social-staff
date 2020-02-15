@@ -27,6 +27,9 @@ export default new Vuex.Store({
     },
     addUser(state, data){
       state.users.push(data)
+    },
+    updateUser(state, data){
+      state.users[state.curID] = data
     }
   },
   actions: {
@@ -36,7 +39,7 @@ export default new Vuex.Store({
       if(u_data[0] === 'addPost'){
         axios.put(ctx.state.postStorage, ctx.state.posts).then(res => console.log(res) )
       }
-      else if(u_data[0] === 'addUser'){
+      else if(u_data[0] === 'addUser' || u_data[0] === 'updateUser'){
         axios.put(ctx.state.userStorage, ctx.state.users).then(res => console.log(res) )
       }
     }
