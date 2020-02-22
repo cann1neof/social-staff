@@ -6,8 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userStorage : 'http://188.225.47.187/api/jsonstorage/958dea570a05b8340764e3f33491cab7',
-    postStorage : 'http://188.225.47.187/api/jsonstorage/18dac9e8448e881a0d3e1ab8c55f552a',
+    userStorage : 'http://188.225.47.187/api/jsonstorage/10cb96ed2f97c63c28755bfd40b63fcb',
+    postStorage : 'http://188.225.47.187/api/jsonstorage/a2fde0131f0c1ceb33ec6728e0c668d3',
     curID : -1,
     users : [],
     posts : [],

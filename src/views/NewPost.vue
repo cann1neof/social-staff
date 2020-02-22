@@ -28,7 +28,6 @@
 
 <script>
     export default {
-        //http://188.225.47.187/api/jsonstorage/76ce57a84a3263d8b9a42bad496071b2
         data : () => {
             return {
                 title : '',
@@ -45,7 +44,7 @@
                         { 
                             'title'  : this.title,
                             'body'   : this.body,
-                            'author' : this.id + 1,
+                            'author' : parseInt(this.id) + 1,
                         } 
                     ])
                     this.$router.push('/')

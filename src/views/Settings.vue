@@ -13,30 +13,26 @@
                         <v-col cols="10">
                             <h1 class="green--text text--darken-2">
                                 <v-icon large color="green darken-2">mdi-account-outline</v-icon>
-                                {{prof.name}}
+                                {{ prof.name }}
                             </h1>
                         </v-col>
                     </v-row>
                     <v-row class="text-left" id="info">
                         <v-col cols="2" id="avatar">
-                            <v-img :src="prof.photo" style="max-width: 100%"  >  
-                                <span @click="edit('avatar')" class="pencil">
-                                    <v-icon> mdi-pencil </v-icon>
-                                </span> 
-                            </v-img>
+                            <v-img :src="prof.photo" style="max-width: 100%"> </v-img>
                         </v-col>
                         <v-col cols="10" class="text-left" >
                             <div class="my-3" id="web">
-                                <span @click="edit('web')" class="pencil"><v-icon> mdi-pencil </v-icon> </span> Веб-сайт: <a :href="'http://' + prof.website" target="_blank">{{prof.website}}</a> 
+                                Веб-сайт: <a :href="'http://' + prof.website" target="_blank"> {{ prof.website }} </a> 
                             </div>
                             <div class="my-3" id="mail">
-                                <span @click="edit('mail')" class="pencil"><v-icon> mdi-pencil </v-icon> </span>  E-mail: <a :href="'mailto:' + prof.email">{{prof.email}}</a>
+                                E-mail: <a :href="'mailto:' + prof.email"> {{ prof.email }} </a>
                             </div>
                             <div class="my-3" id="ct">
-                                <span @click="edit('ct')" class="pencil"><v-icon> mdi-pencil </v-icon> </span>  Город: {{ prof.city}}
+                                Город: {{ prof.city }}
                             </div>
                             <div class="my-3" id="work">
-                                <span @click="edit('work')" class="pencil"><v-icon> mdi-pencil </v-icon> </span>  Место работы: {{prof.company}}
+                                Место работы: {{ prof.company }}
                             </div>
                         </v-col>
                     </v-row>
@@ -104,6 +100,7 @@
                         <v-btn @click="confirm" color="white" light>
                             Подтвердить
                         </v-btn>
+
                     </v-card>
                 </v-col>
         </v-row>
@@ -136,23 +133,3 @@
         }
     }
 </script>
-
-<style>
-.pencil { display: none; cursor: pointer; }
-
-#avatar:hover .pencil{
-    display: initial;
-}
-#web:hover .pencil{
-    display: initial;
-}
-#mail:hover .pencil{
-    display: initial;
-}
-#ct:hover .pencil{
-    display: initial;
-}
-#work:hover .pencil{
-    display: initial;
-}
-</style>
